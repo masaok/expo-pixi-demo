@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import DemoScreen from '../screens/DemoScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -67,7 +68,24 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const DemoStack = createStackNavigator(
+  {
+    Demo: DemoScreen,
+  },
+  config
+);
+
+DemoStack.navigationOptions = {
+  tabBarLabel: 'Demo',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+  ),
+};
+
+DemoStack.path = '';
+
 const tabNavigator = createBottomTabNavigator({
+  DemoStack,
   HomeStack,
   LinksStack,
   SettingsStack,
